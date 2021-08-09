@@ -1,0 +1,21 @@
+{
+  "name": "ffmpeg-assistant",
+  "version": "1.0.0",
+  "description": "An FFmpeg command transcoding assistant",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/lmshao/FFmpegAssistant",
+  "keywords": [
+    "Electron",
+    "FFmpeg",
+    "Assistant",
+    "transcoding"
+  ],
+  "author": "SHAO Liming",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^12.0.5"
+  }
+}
