@@ -1,19 +1,78 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
+const { app, Menu, BrowserWindow, shell, dialog } = require('electron');
+const path = require('path');
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 800,
+    icon: 'favicon.ico',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
-  })
+  });
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('index.html').catch((e) => {
+    dialog.showErrorBox('', e.message);
+  });
+
+  const template = [
+    {
+      label: 'File',
+      role: 'fileMenu'
+    },
+    {
+      label: 'View',
+      role: 'viewMenu'
+    },
+    {
+      label: 'Help',
+      submenu: [
+        {
+          label: 'About',
+          click: () => {
+            let aboutWindow = new BrowserWindow({
+              width: 460,
+              height: 250,
+              // title: 'About',
+              icon: 'favicon.ico',
+              autoHideMenuBar: true,
+              parent: mainWindow,
+              resizable: false,
+              // backgroundColor: "#ccfcf6"
+            });
+            aboutWindow.loadFile('about.html').catch((e) => {
+              dialog.showErrorBox('', e.message);
+            });
+
+            // open links with OS explorer
+            aboutWindow.webContents.on('will-navigate', (event, url) => {
+              event.preventDefault();
+              shell.openExternal(url).catch((e) => {
+                dialog.showErrorBox('', e.message);
+              });
+            });
+          }
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: 'Github',
+          click: () => {
+            shell.openExternal('https://github.com/lmshao/FFmpegAssistant').catch((e) => {
+              dialog.showErrorBox('', e.message);
+            });
+          }
+        }
+      ]
+    }
+  ];
+
+  const dockMenu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(dockMenu);
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -23,21 +82,23 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow()
-  
+  createWindow();
+
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
-})
+    if (BrowserWindow.getAllWindows().length === 0)
+      createWindow();
+  });
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit()
-})
+  if (process.platform !== 'darwin')
+    app.quit();
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

@@ -1,19 +1,213 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>FFmpeg Assistant</title>
-  </head>
-  <body>
-    <h1>FFmpeg Assistant</h1>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <!--      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">-->
+  <!--      <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">-->
+  <title>FFmpeg Assistant</title>
+  <link rel="stylesheet" href="fa.css">
+  <script type="text/javascript" src="fa.js"></script>
+</head>
+
+<body>
+  <h1>encoding options</h1>
+  <div id="videoPart">
+    Video:&nbsp;&nbsp;
+    <label>
+      &nbsp;&nbsp;enable<input type="radio" checked="checked" name="videoOutput" value="enable" id="videoOutputEnable"
+        onclick="checkVideoStatus();" />
+      &nbsp;&nbsp;disable<input type="radio" name="videoOutput" value="disable" id="videoOutputDisable"
+        onclick="checkVideoStatus();" />
+    </label>
+    <hr />
+
+    <div id="videoEnableDiv">
+      <form>
+        Encoder:&nbsp;&nbsp;
+        <select id="videoCodecType" onchange="showVideoOptions()">
+          <option value="keep">Keep</option>
+          <option value="x264" selected>H264/AVC</option>
+          <option value="x265">H265/HEVC</option>
+        </select>
+        <label>
+          &nbsp;&nbsp;CBR mode<input type="radio" checked="checked" name="video-mode" id="video-cbr"
+            onclick="updateX264Mode();" />
+          &nbsp;&nbsp;CRF mode<input type="radio" name="video-mode" id="video-crf" onclick="updateX264Mode();" />
+        </label>
+      </form>
+
+      <div id="videoEncoderOptions" style="display: block">
+        <div id="x264Options" style="display: block">
+          <form>
+            <fieldset>
+              <legend>x264 options</legend>
+
+              <table id="video-cbr-options" style="display: block">
+                <tr>
+                  <td class="left">bitrate:</td>
+                  <td style="text-align: right"><input type="text" id="video-bitrate"
+                      onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="2048" style="text-align: right" /></td>
+                  <td class="left">&nbsp;kb/s</td>
+                </tr>
+                <tr>
+                  <td class="left">floating range:</td>
+                  <td style="text-align: right">
+                    <select id="video-bitrate-range" onchange="showVideoOptions()">
+                      <option value="0">0</option>
+                      <option value="25">25</option>
+                      <option value="50" selected>50</option>
+                      <option value="75">75</option>
+                      <option value="100">100</option>
+                    </select>
+                  </td>
+                  <td class="left">&nbsp;%
+                  <td>
+                </tr>
+              </table>
+
+              <table id="video-crf-options" style="display: none">
+                <tr>
+                  <td>CRF value:</td>
+                  <td id="progressbar">
+                    <div class="progress">
+                      <div class="progress-bar">
+                        <div class="progress-thumb"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div id="video-crf-options-value">23</div>
+                  </td>
+                </tr>
+              </table>
+              <hr>
+              <table>
+                <tr>
+                  <td>no B frame:</td>
+                  <td>
+                    <input type="checkbox" id="video-no-b-frame" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>profile:</td>
+                  <td>
+                    <select id="video-profile">
+                      <option value="default" selected>auto</option>
+                      <option value="baseline">baseline</option>
+                      <option value="main">main</option>
+                      <option value="high">high</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+
+            </fieldset>
+          </form>
+
+        </div>
+        <div id="x265Options" style="display: none">
+          <form>
+            <fieldset>
+              <legend>opus options</legend>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+  <div id="audioPart">
+    Audio:&nbsp;
+    <label>
+      &nbsp;&nbsp;enable<input type="radio" name="audioOutput" value="enable" id="audioOutputEnable" checked
+        onclick="checkAudioStatus();" />
+      &nbsp;&nbsp;disable<input type="radio" name="audioOutput" value="disable" id="audioOutputDisable"
+        onclick="checkAudioStatus();" />
+    </label>
+    <hr />
+    <div id="audioEnableDiv">
+      <form>
+        Encoder:&nbsp;&nbsp;
+        <select id="audioCodecType" onchange="showAudioOptions()">
+          <option value="keep">Keep</option>
+          <option value="aac" selected>AAC</option>
+          <option value="opus">Opus</option>
+        </select>
+      </form>
+
+      <div id="audioEncoderOptions" style="display: block">
+        <div id="aacOptions" style="display: block">
+          <form>
+            <fieldset>
+              <legend>aac options</legend>
+              <table>
+                <tr>
+                  <td class="left">bitrate:</td>
+                  <td><input type="text" id="audio-bitrate" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="128"
+                      class="right" /></td>
+                  <td class="left">&nbsp;kb/s
+                  <td>
+                </tr>
+                <tr>
+                  <td class="left">channel:</td>
+                  <td><input type="text" id="audio-channel" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="2"
+                      class="right" /></td>
+                  <td class="left">&nbsp;channels
+                  <td>
+                </tr>
+                <tr>
+                  <td class="left">sample rate:</td>
+                  <td><input type="text" id="audio-sampleRate" onkeyup="value=value.replace(/[^\d]/g,'')"
+                      placeholder="keep" class="right" /></td>
+                  <td class="left">&nbsp;Hz
+                  <td>
+                </tr>
+              </table>
+            </fieldset>
+          </form>
+
+        </div>
+        <div id="opusOptions" style="display: none">
+          <form>
+            <fieldset>
+              <legend>opus options</legend>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+
+  <div>
+    <button onclick="showCommand()">Output</button>
+    <span style="float: right">
+      <input type="submit" value="Copy all" id="copy-all-btn">
+      <input type="submit" value="Copy all" id="copy-part-btn">
+    </span>
+  </div>
+
+  <br>
+  <form>
+    <fieldset>
+      <!--      <legend></legend>-->
+      <span id="ffmpeg-command"></span>
+    </fieldset>
+  </form>
+  <hr />
+  <div class="footer" style="width: 100%;">
     We are using Node.js <span id="node-version"></span>,
     Chromium <span id="chrome-version"></span>,
     and Electron <span id="electron-version"></span>.
+  </div>
+  <!-- You can also require other files to run in this process -->
+  <script src="./renderer.js"></script>
+</body>
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-  </body>
 </html>
