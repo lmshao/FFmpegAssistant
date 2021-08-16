@@ -12,9 +12,18 @@
 </head>
 
 <body>
-  <h1>encoding options</h1>
+  <h3>encoding options</h3>
   <div id="videoPart">
-    Video:&nbsp;&nbsp;
+    <svg t="1629096832137" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      p-id="1268" width="30" height="30">
+      <path
+        d="M825.6 153.6H198.4C124.5 153.6 64 214.1 64 288v448c0 73.9 60.5 134.4 134.4 134.4h627.2c73.9 0 134.4-60.5 134.4-134.4V288c0-73.9-60.5-134.4-134.4-134.4z m-138.2 44.8l112 112H706l-112-112h93.4z m-156.8 0l112 112H526.7l-112-112h115.9z m-179.2 0l112 112H347.5l-112-112h115.9zM108.8 288c0-41.4 28.4-76.1 66.7-86.3l108.7 108.7H108.8V288z m806.4 448c0 49.4-40.2 89.6-89.6 89.6H198.4c-49.4 0-89.6-40.2-89.6-89.6V355.2h806.4V736z m0-425.6h-52.5l-112-112h74.9c49.4 0 89.6 40.2 89.6 89.6v22.4z"
+        p-id="1269" fill="#8a8a8a"></path>
+      <path
+        d="M454 687.2l149.3-77.6c27.5-13.8 27.5-53 0-66.8L468 472.2c-31.2-15.6-68 7.1-68 42v139.6c0 27.8 29.2 45.8 54 33.4zM444.8 512l134.4 67.2-134.4 67.2V512z"
+        p-id="1270" fill="#8a8a8a"></path>
+    </svg>
+    &nbsp;Video:&nbsp;&nbsp;
     <label>
       &nbsp;&nbsp;enable<input type="radio" checked="checked" name="videoOutput" value="enable" id="videoOutputEnable"
         onclick="checkVideoStatus();" />
@@ -46,13 +55,13 @@
 
               <table id="video-cbr-options" style="display: block">
                 <tr>
-                  <td class="left">bitrate:</td>
+                  <td>bitrate:</td>
                   <td style="text-align: right"><input type="text" id="video-bitrate"
                       onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="2048" style="text-align: right" /></td>
-                  <td class="left">&nbsp;kb/s</td>
+                  <td>&nbsp;kb/s</td>
                 </tr>
                 <tr>
-                  <td class="left">floating range:</td>
+                  <td>floating range:</td>
                   <td style="text-align: right">
                     <select id="video-bitrate-range" onchange="showVideoOptions()">
                       <option value="0">0</option>
@@ -62,7 +71,7 @@
                       <option value="100">100</option>
                     </select>
                   </td>
-                  <td class="left">&nbsp;%
+                  <td>&nbsp;%
                   <td>
                 </tr>
               </table>
@@ -121,7 +130,13 @@
 
   <br>
   <div id="audioPart">
-    Audio:&nbsp;
+    <svg t="1629097239127" class="icon" viewBox="0 0 1256 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      p-id="2959" width="30" height="30">
+      <path
+        d="M201.681455 74.472727a111.709091 111.709091 0 0 0-111.709091 111.709091v651.636364a111.709091 111.709091 0 0 0 111.709091 111.709091h837.818181a111.709091 111.709091 0 0 0 111.709091-111.709091V186.181818a111.709091 111.709091 0 0 0-111.709091-111.709091h-837.818181z m0-74.472727h837.818181a186.181818 186.181818 0 0 1 186.181819 186.181818v651.636364a186.181818 186.181818 0 0 1-186.181819 186.181818h-837.818181a186.181818 186.181818 0 0 1-186.181819-186.181818V186.181818a186.181818 186.181818 0 0 1 186.181819-186.181818z m551.563636 234.589091c26.344727-7.447273 47.848727 7.912727 48.128 34.071273v322.280727c0 41.751273-41.984 80.663273-93.975273 87.04-51.944727 6.144-93.928727-20.200727-93.928727-61.905455 0-41.751273 41.984-80.663273 93.928727-87.04 35.374545-4.142545 55.063273 7.121455 55.063273 7.121455V352.349091c0-19.688727-21.504-12.567273-21.504-12.567273L547.374545 400.523636s-22.295273 7.912727-22.295272 26.391273v222.72c0 41.704727-37.888 80.104727-89.832728 87.505455-51.991273 7.447273-93.975273-18.152727-93.975272-59.857455 0-41.751273 41.984-81.454545 93.975272-88.855273 35.328-5.12 51.2 5.632 51.2 5.632V363.380364c0-26.391273 21.224727-53.992727 47.848728-61.719273l218.903272-67.025455z"
+        p-id="2960" fill="#8a8a8a"></path>
+    </svg>
+    &nbsp;Audio:&nbsp;&nbsp;
     <label>
       &nbsp;&nbsp;enable<input type="radio" name="audioOutput" value="enable" id="audioOutputEnable" checked
         onclick="checkAudioStatus();" />
@@ -146,24 +161,24 @@
               <legend>aac options</legend>
               <table>
                 <tr>
-                  <td class="left">bitrate:</td>
+                  <td>bitrate:</td>
                   <td><input type="text" id="audio-bitrate" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="128"
-                      class="right" /></td>
-                  <td class="left">&nbsp;kb/s
+                      style="text-align: right" /></td>
+                  <td>&nbsp;kb/s
                   <td>
                 </tr>
                 <tr>
-                  <td class="left">channel:</td>
+                  <td>channel:</td>
                   <td><input type="text" id="audio-channel" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="2"
-                      class="right" /></td>
-                  <td class="left">&nbsp;channels
+                      style="text-align: right" /></td>
+                  <td>&nbsp;channels
                   <td>
                 </tr>
                 <tr>
-                  <td class="left">sample rate:</td>
+                  <td>sample rate:</td>
                   <td><input type="text" id="audio-sampleRate" onkeyup="value=value.replace(/[^\d]/g,'')"
-                      placeholder="keep" class="right" /></td>
-                  <td class="left">&nbsp;Hz
+                      placeholder="keep" style="text-align: right" /></td>
+                  <td>&nbsp;Hz
                   <td>
                 </tr>
               </table>
@@ -184,28 +199,84 @@
   </div>
 
   <br>
+  <div id="metadataPart">
+    <svg t="1629097384193" class="icon" viewBox="0 0 1256 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      p-id="966" width="30" height="30">
+      <path
+        d="M983.645091 128.512v91.042909h94.626909l-36.538182-34.536727-58.088727-56.506182z m-74.472727-54.039273h-707.490909a111.709091 111.709091 0 0 0-111.709091 111.709091v651.636364a111.709091 111.709091 0 0 0 111.709091 111.709091h837.818181a111.709091 111.709091 0 0 0 111.709091-111.709091V294.027636h-242.036363V74.472727zM201.681455 0H958.370909l135.307636 131.677091 132.00291 124.741818V837.818182a186.181818 186.181818 0 0 1-186.181819 186.181818h-837.818181a186.181818 186.181818 0 0 1-186.181819-186.181818V186.181818a186.181818 186.181818 0 0 1 186.181819-186.181818z m46.545454 386.327273a37.236364 37.236364 0 1 1 0-74.472728h400.849455a37.236364 37.236364 0 1 1 0 74.472728H248.226909z m0 372.363636a37.236364 37.236364 0 1 1 0-74.472727H991.883636a37.236364 37.236364 0 1 1 0 74.472727H248.226909z m0-186.181818a37.236364 37.236364 0 1 1 0-74.472727H991.883636a37.236364 37.236364 0 1 1 0 74.472727H248.226909z"
+        p-id="967" fill="#8a8a8a"></path>
+    </svg>
+    &nbsp;Metadata:&nbsp;&nbsp;
+    <label>
+      &nbsp;&nbsp;enable<input type="radio" name="metaOutput" value="enable" id="metadataOutputEnable" checked
+        onclick="checkMetadataStatus();" />
+      &nbsp;&nbsp;disable<input type="radio" name="metaOutput" value="disable" id="metadataOutputDisable"
+        onclick="checkMetadataStatus();" />
+    </label>
+    <hr />
+    <div id="metadataEnableDiv">
+      <form>
+        <fieldset>
+          <legend>metadata options</legend>
+          <table>
+            <tr>
+              <td>
+                <input type="checkbox" id="metadata-title" />
+              </td>
+              <td>Title:</td>
+              <td>
+                <input type="text" id="metadata-title-value" placeholder="Movie Name" style="width: 400px" />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <input type="checkbox" id="metadata-copyright" />
+              </td>
+              <td>Copyright:</td>
+              <td>
+                <input type="text" id="metadata-copyright-value"
+                  value="Copyright © 2021 SHAO Liming. All rights reserved" style="width: 400px" />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <input type="checkbox" id="metadata-description" />
+              </td>
+              <td>Description:</td>
+              <td>
+                <input type="text" id="metadata-description-value" placeholder="notes" style="width: 400px" />
+              </td>
+            </tr>
+          </table>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <br>
 
   <div>
     <button onclick="showCommand()">Output</button>
     <span style="float: right">
-      <input type="submit" value="Copy all" id="copy-all-btn">
-      <input type="submit" value="Copy all" id="copy-part-btn">
+      <input type="submit" value="Copy All" id="copy-all-btn">
+      <input type="submit" value="Copy Parameters" id="copy-part-btn">
     </span>
   </div>
 
   <br>
   <form>
     <fieldset>
-      <!--      <legend></legend>-->
-      <span id="ffmpeg-command"></span>
+      <textarea id="ffmpeg-command" rows="3" spellcheck="false"
+        style="font-size: 16px; font-family: Consolas, sans-serif; width: 100%;"></textarea>
     </fieldset>
   </form>
   <hr />
-  <div class="footer" style="width: 100%;">
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
-  </div>
+  <!--  <div class="footer" style="width: 100%;">-->
+  <!--    We are using Node.js <span id="node-version"></span>,-->
+  <!--    Chromium <span id="chrome-version"></span>,-->
+  <!--    and Electron <span id="electron-version"></span>.-->
+  <!--  </div>-->
   <!-- You can also require other files to run in this process -->
   <script src="./renderer.js"></script>
 </body>

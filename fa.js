@@ -122,8 +122,33 @@ function showCommand() {
         cmd += " -an";
     }
 
+    if (document.getElementById("metadataOutputEnable").checked){
+        if(document.getElementById("metadata-title").checked){
+            let title = document.getElementById("metadata-title-value").value;
+            cmd += ` -metadata title="${title}"`;
+        }
+
+        if(document.getElementById("metadata-copyright").checked){
+            let title = document.getElementById("metadata-copyright-value").value;
+            cmd += ` -metadata copyright="${title}"`;
+        }
+
+        if(document.getElementById("metadata-description").checked){
+            let title = document.getElementById("metadata-description-value").value;
+            cmd += ` -metadata description="${title}"`;
+        }
+    }
+
     cmd += " OUTPUT";
 
-    const element = document.getElementById("ffmpeg-command");
-    if (element) element.innerText = cmd;
+    const ffcmd = document.getElementById("ffmpeg-command");
+    ffcmd.value = cmd;
+}
+
+function checkMetadataStatus() {
+    if (document.getElementById("metadataOutputEnable").checked) {
+        document.getElementById("metadataEnableDiv").style.display = "block";
+    } else {
+        document.getElementById("metadataEnableDiv").style.display = "none";
+    }
 }

@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const copyAllBtn = document.getElementById('copy-all-btn');
   copyAllBtn.addEventListener('click', function () {
-    const cmd = document.getElementById("ffmpeg-command").innerText;
+    const cmd = document.getElementById("ffmpeg-command").value;
     clipboard.writeText(cmd);
   });
 
@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
       return x;
     };
 
-    const cmd = document.getElementById("ffmpeg-command").innerText;
+    const cmd = document.getElementById("ffmpeg-command").value;
     if (!!cmd) {
       console.log(cmd.substring(cmd.indexOfNth(' ', 2), cmd.lastIndexOf(' ')));
       clipboard.writeText(cmd.substring(cmd.indexOfNth(' ', 2), cmd.lastIndexOf(' ')));
