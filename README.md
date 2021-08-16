@@ -1,9 +1,8 @@
 # FFmpeg Assistant
 
-A basic Electron application needs just these files:
+A visual transcoding assistant for ffmpeg.
 
-- `package.json` - Points to the app's main file and lists its details and dependencies.
-- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
-- `index.html` - A web page to render. This is the app's **renderer process**.
+This is an electron app, of course, you can also use it through the web [https://lmshao.github.io/FFmpegAssistant/](https://lmshao.github.io/FFmpegAssistant/).
 
-You can learn more about each of these components within the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start).
+It's just a reminder assistant, ffmpeg binary for linux is here [https://github.com/lmshao/FFmpegBinary](https://github.com/lmshao/FFmpegBinary).
+
